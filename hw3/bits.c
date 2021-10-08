@@ -252,8 +252,8 @@ int sign(int x) {
  *   Rating: 3 
  */
 int rotateLeft(int x, int n) {
-  // (32 + ~n + 1): number of remaining bits
-  return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
+  // return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
+  return 2
 }
 
 /* 
