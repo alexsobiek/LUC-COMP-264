@@ -266,6 +266,6 @@ int rotateLeft(int x, int n) {
 int subOK(int x, int y) {
   int xSign = (x>>31)|(0xFFFFFFFF>>31);
   int ySign = (y>>31)|(0xFFFFFFFF>>31);
-  int diffSign = ((~y + 1 + x)>>31)|(0xFFFFFFFF>>31)
+  int diffSign = ((~y + 1 + x)>>31)|(0xFFFFFFFF>>31);
   return !((!(xSign) & ySign & diffSign) | (xSign & !(ySign) & !(diffSign)));
 }
