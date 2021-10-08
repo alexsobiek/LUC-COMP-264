@@ -237,8 +237,7 @@ int tmax(void) {
  *  Rating: 2
  */
 int sign(int x) {
-    unsigned int a = ~0;
-    return (x >> 31) | (a >> 31); // returns the left most bit
+    return (x>>31) | (!!x);
 }
 /* 
  * rotateLeft - Rotate x to the left by n
