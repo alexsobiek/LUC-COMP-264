@@ -171,7 +171,7 @@ NOTES:
  *   Rating: 1
  */
 int bitAnd(int x, int y) {
-  return ~(~x&~y);
+  return ~(~x|~y);
 }
 /* 
  * bitXor - x^y using only ~ and & 
@@ -181,8 +181,7 @@ int bitAnd(int x, int y) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  unsigned int notAnd = ~x&~y;
-  return ~(~x&(notAnd))&~(~y&(notAnd));
+  return ~(x&y)&~(~x&~y);
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
