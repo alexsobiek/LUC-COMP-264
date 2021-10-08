@@ -171,6 +171,11 @@ NOTES:
  *   Rating: 1
  */
 int bitAnd(int x, int y) {
+  /**
+   * NOT x OR NOT y will set every X and Y equal to 1 except when X and Y are both 1
+   * using NOT on that operation will then give us 0 for all X and Y except when X and Y are equal to 1
+   * which is the same thing as AND
+   */
   return ~(~x|~y);
 }
 /* 
@@ -181,6 +186,17 @@ int bitAnd(int x, int y) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
+  /**
+   * For each bit, ~(x&y) will return 1 for all x & y except when x and y are 1
+   * ~(~x&~y) returns 0 only when x or y is 0
+   * | x | y | ~(x&y) | & | ~(~x&~y) |
+   * |---|---|--------|---|----------|
+   * | 0 | 0 | 1      | 0 | 0        |
+   * | 0 | 1 | 1      | 1 | 1        |
+   * | 1 | 0 | 1      | 1 | 1        |
+   * | 1 | 1 | 0      | 0 | 0        |
+   *                    ^ same as XOR
+   */
   return ~(x&y)&~(~x&~y);
 }
 /* 
@@ -191,9 +207,11 @@ int bitXor(int x, int y) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  // The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, etc)
-  // If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
-  // every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
+  /**
+   * The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, etc)
+   * If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
+   * every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
+   */
   return !((x&0xAAAAAAAA)^0xAAAAAAAA);
 }
 /* 
@@ -203,8 +221,12 @@ int allOddBits(int x) {
  *   Rating: 1
  */
 int tmax(void) {
-  unsigned int x = 0;
-  return ~x>>1;
+  /**
+   * An unsigned -1, or ~0 is the same as 0xFFFFFFFF
+   * Shifting to the right by 1 drops the sign and returns the largest positive integer
+   */
+  unsigned int x = ~0;
+  return x>>1;
 }
 /* 
  * sign - return 1 if positive, 0 if zero, and -1 if negative
@@ -215,18 +237,20 @@ int tmax(void) {
  *  Rating: 2
  */
 int sign(int x) {
-    return 2;
+    return x>>31 | -x>>31; // returns the left most bit
 }
 /* 
  * rotateLeft - Rotate x to the left by n
  *   Can assume that 0 <= n <= 31
- *   Examples: rotateLeft(0x87654321,4) = 0x76543218
+ *   Examples: rotateLeft(0x87654321,4) = 0x76543218 (1985229336)
+ *   10000111011001010100001100100001
+ *   1110110010101000011001000011000
  *   Legal ops: ~ & ^ | + << >> !
  *   Max ops: 25
  *   Rating: 3 
  */
 int rotateLeft(int x, int n) {
-  return 2;
+  return (x<<n)|(n >> (32 - n));
 }
 /* 
  * subOK - Determine if can compute x-y without overflow
