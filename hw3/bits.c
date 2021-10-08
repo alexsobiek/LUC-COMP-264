@@ -212,8 +212,7 @@ int allOddBits(int x) {
    * If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
    * every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
    */
-  unsigned int a = ~0;
-  return !((x & a) ^ a);
+  return !((x & ~0) ^ ~0);
 }
 /* 
  * TMax - return maximum two's complement integer 
@@ -226,8 +225,7 @@ int tmax(void) {
    * An unsigned -1, or ~0 is the same as 0xFFFFFFFF
    * Shifting to the right by 1 drops the sign and returns the largest positive integer
    */
-  unsigned int x = ~0;
-  return x>>1;
+  return ~0>>1;
 }
 /* 
  * sign - return 1 if positive, 0 if zero, and -1 if negative
