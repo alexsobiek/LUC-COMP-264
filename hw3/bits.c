@@ -253,7 +253,7 @@ int sign(int x) {
  */
 int rotateLeft(int x, int n) {
   // return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
-  return 2
+  return 2;
 }
 
 /* 
