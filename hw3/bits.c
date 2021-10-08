@@ -194,7 +194,7 @@ int allOddBits(int x) {
   // The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, etc)
   // If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
   // every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
-  return !((x&0xAA)^0xAA);
+  return !((x&0xAAAAAAAA)^0xAAAAAAAA);
 }
 /* 
  * TMax - return maximum two's complement integer 
