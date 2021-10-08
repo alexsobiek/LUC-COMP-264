@@ -252,6 +252,11 @@ int sign(int x) {
  *   Rating: 3 
  */
 int rotateLeft(int x, int n) {
+  /**
+   * I understand this problem conceptually, but I do not understand how to shift bits from the
+   * left side back to the right. I spent a while on various sites looking for an explanation and
+   * all I could find was the commented out solution which does work, but it's not mine.
+   */
   // return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
   return 2;
 }
