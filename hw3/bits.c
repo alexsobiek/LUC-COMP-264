@@ -176,7 +176,7 @@ int bitAnd(int x, int y) {
    * using NOT on that operation will then give us 0 for all X and Y except when X and Y are equal to 1
    * which is the same thing as AND
    */
-  return ~(~x|~y);
+  return ~(~x | ~y);
 }
 /* 
  * bitXor - x^y using only ~ and & 
@@ -197,7 +197,7 @@ int bitXor(int x, int y) {
    * | 1 | 1 | 0      | 0 | 0        |
    *                    ^ same as XOR
    */
-  return ~(x&y)&~(~x&~y);
+  return ~(x & y) & ~(~x & ~y);
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -212,7 +212,7 @@ int allOddBits(int x) {
    * If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
    * every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
    */
-  return !((x&0xAAAAAAAA)^0xAAAAAAAA);
+  return !((x & 0xAAAAAAAA) ^ 0xAAAAAAAA);
 }
 /* 
  * TMax - return maximum two's complement integer 
@@ -237,21 +237,24 @@ int tmax(void) {
  *  Rating: 2
  */
 int sign(int x) {
-    return x>>31 | -x>>31; // returns the left most bit
+    unsigned int a = ~0;
+    return (x >> 31) | (a >> 31); // returns the left most bit
 }
 /* 
  * rotateLeft - Rotate x to the left by n
  *   Can assume that 0 <= n <= 31
- *   Examples: rotateLeft(0x87654321,4) = 0x76543218 (1985229336)
- *   10000111011001010100001100100001
- *   1110110010101000011001000011000
+ *   Examples: rotateLeft(0x87654321,4) = 0x76543218
  *   Legal ops: ~ & ^ | + << >> !
  *   Max ops: 25
  *   Rating: 3 
  */
 int rotateLeft(int x, int n) {
-  return (x<<n)|(n >> (32 - n));
+    // (32 + ~n + 1): number of remaining bits
+    unsigned int a = ~0;
+    x << n; // left shift by n
+    return (x >> (32 + ~n + 1)) & ~(a << n);
 }
+
 /* 
  * subOK - Determine if can compute x-y without overflow
  *   Example: subOK(0x80000000,0x80000000) = 1,
@@ -261,5 +264,8 @@ int rotateLeft(int x, int n) {
  *   Rating: 3
  */
 int subOK(int x, int y) {
-  return 2;
+  int xSign = (x>>31)|(0xFFFFFFFF>>31);
+  int ySign = (y>>31)|(0xFFFFFFFF>>31);
+  int diffSign = ((~y + 1 + x)>>31)|(0xFFFFFFFF>>31)
+  return !((!(xSign) & ySign & diffSign) | (xSign & !(ySign) & !(diffSign)));
 }
