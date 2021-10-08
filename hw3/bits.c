@@ -255,8 +255,7 @@ int sign(int x) {
  */
 int rotateLeft(int x, int n) {
   // (32 + ~n + 1): number of remaining bits
-  unsigned int a = ~0;
-  return x << n | (x >> (32 + ~n + 1)) & ~(a << n);
+  return x << n | (x >> (32 + ~n + 1)) & ~(~0 << n);
 }
 
 /* 
