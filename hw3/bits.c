@@ -1,7 +1,7 @@
 /* 
  * CS:APP Data Lab 
  * 
- * <Please put your name and userid here>
+ * Alexander Sobiek, asobiek@luc.edu
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -171,7 +171,7 @@ NOTES:
  *   Rating: 1
  */
 int bitAnd(int x, int y) {
-  return 2;
+  return ~(~x&~y);
 }
 /* 
  * bitXor - x^y using only ~ and & 
@@ -181,7 +181,8 @@ int bitAnd(int x, int y) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return 2;
+  unsigned int notAnd = ~x&~y;
+  return ~(~x&(notAnd))&~(~y&(notAnd));
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -191,7 +192,10 @@ int bitXor(int x, int y) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  return 2;
+  // The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, etc)
+  // If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
+  // every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
+  return !((x&0xAA)^x);
 }
 /* 
  * TMax - return maximum two's complement integer 
@@ -200,7 +204,8 @@ int allOddBits(int x) {
  *   Rating: 1
  */
 int tmax(void) {
-  return 2;
+  unsigned int x = 0;
+  return ~x>>1;
 }
 /* 
  * sign - return 1 if positive, 0 if zero, and -1 if negative
