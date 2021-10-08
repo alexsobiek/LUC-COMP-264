@@ -252,7 +252,7 @@ int rotateLeft(int x, int n) {
     // (32 + ~n + 1): number of remaining bits
     unsigned int a = ~0;
     x << n; // left shift by n
-    return (x >> (32 + ~n + 1)) & ~(a << n);
+    return x << n | (x >> (32 + ~n + 1)) & ~(a << n);
 }
 
 /* 
@@ -267,5 +267,5 @@ int subOK(int x, int y) {
   int xSign = (x>>31)|(0xFFFFFFFF>>31);
   int ySign = (y>>31)|(0xFFFFFFFF>>31);
   int diffSign = ((~y + 1 + x)>>31)|(0xFFFFFFFF>>31);
-  return !((!(xSign) & ySign & diffSign) | (xSign & !(ySign) & !(diffSign)));
+  return !((!(((xSign) & ySign) & diffSign)) | (xSign & !(ySign) & !(diffSign)));
 }
