@@ -237,12 +237,12 @@ int tmax(void) {
  *  Rating: 2
  */
 int sign(int x) {
-    /**
-     * x>>31 grabs the sign bit
-     * !!x will return 1 if positive and 0 if 0
-     * (x>>31) OR (!!x) will return -1 if x>>31 is negative as well, 0 if both x>>31 & !!x are 0, and 1 if !!x is 1
-     */
-    return (x>>31) | (!!x);
+  /**
+   * x>>31 grabs the sign bit
+   * !!x will return 1 if positive and 0 if 0
+   * (x>>31) OR (!!x) will return -1 if x>>31 is negative as well, 0 if both x>>31 & !!x are 0, and 1 if !!x is 1
+   */
+  return (x>>31) | (!!x);
 }
 /* 
  * rotateLeft - Rotate x to the left by n
@@ -253,9 +253,9 @@ int sign(int x) {
  *   Rating: 3 
  */
 int rotateLeft(int x, int n) {
-    // (32 + ~n + 1): number of remaining bits
-    unsigned int a = ~0;
-    return x << n | (x >> (32 + ~n + 1)) & ~(a << n);
+  // (32 + ~n + 1): number of remaining bits
+  unsigned int a = ~0;
+  return x << n | (x >> (32 + ~n + 1)) & ~(a << n);
 }
 
 /* 
@@ -274,5 +274,5 @@ int subOK(int x, int y) {
    * (x + (~y + 1)) will return the sign of the difference
    * (x + (~y + 1)) ^ x will check whether or not the sign of the difference and the sign of x are the same
    */
-    return !(x ^ y & ((x + (~y + 1)) ^ x) >> 31);
+  return !(((x ^ y) & ((x + (~y + 1)) ^ x)) >> 31);
 }
