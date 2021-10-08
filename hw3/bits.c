@@ -212,7 +212,8 @@ int allOddBits(int x) {
    * If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
    * every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
    */
-  return !((x & 0xAAAAAAAA) ^ 0xAAAAAAAA);
+  unsigned int a = ~0;
+  return !((x & a) ^ a);
 }
 /* 
  * TMax - return maximum two's complement integer 
