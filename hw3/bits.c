@@ -208,11 +208,13 @@ int bitXor(int x, int y) {
  */
 int allOddBits(int x) {
   /**
-   * The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, ~0)
-   * If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
-   * every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
+   * The only time all odd bits are 1/even bits are 0 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, etc)
+   * If the bit pattern follows all odd bits being 1, using AND with 0xAAAAAAAA (largest 32 bit number with alternating
+   * 0's and 1's with odds being 1 replicate the bit pattern of 0xAAAAAAAA. The XOR will then verify the pattern contains
+   * does not contain a 1 in an evens place. The ! forces the return to be either 1 or 0 based on the opposite of the
+   * first bit.
    */
-  return ~((x & ~0) ^ ~0);
+  return !((x & 0xAAAAAAAA) ^ 0xAAAAAAAA);
 }
 /* 
  * TMax - return maximum two's complement integer 
@@ -221,11 +223,14 @@ int allOddBits(int x) {
  *   Rating: 1
  */
 int tmax(void) {
-  /**
-   * An unsigned -1, or ~0 is the same as 0xFFFFFFFF
-   * Shifting to the right by 1 drops the sign and returns the largest positive integer
-   */
-  return ~0>>1;
+    /**
+     * An unsigned -1, or ~0 is the same as 0xFFFFFFFF
+     * Shifting to the right by 1 drops the sign and returns the largest positive integer.
+     * Creating an unsigned int is necessary first, though I'm not entirely sure why.
+     * Simply doing return ~0>>1 returns -1.
+     */
+    unsigned int a = ~0;
+    return a>>1;
 }
 /* 
  * sign - return 1 if positive, 0 if zero, and -1 if negative
@@ -237,7 +242,7 @@ int tmax(void) {
  */
 int sign(int x) {
   /**
-   * x>>31 grabs the sign bit
+   * x>>31 shifts the bit pattern to leave only the sign
    * !!x will return 1 if positive and 0 if 0
    * (x>>31) OR (!!x) will return -1 if x>>31 is negative as well, 0 if both x>>31 & !!x are 0, and 1 if !!x is 1
    */
