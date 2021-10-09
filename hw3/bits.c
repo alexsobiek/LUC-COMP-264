@@ -208,11 +208,11 @@ int bitXor(int x, int y) {
  */
 int allOddBits(int x) {
   /**
-   * The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, etc)
+   * The only time all odd bits are 1 is when we have a hexadecimal number with only A's (0xAA, 0xAAA, ~0)
    * If every odd bit is 1, using AND then XOR will flip the bit pattern to every even bit being 1, then NOT will change
    * every odd bit to 1 IF/only if the bit pattern of x was every odd bit 1.
    */
-  return !((x & ~0) ^ ~0);
+  return ~((x & ~0) ^ ~0);
 }
 /* 
  * TMax - return maximum two's complement integer 
@@ -253,12 +253,9 @@ int sign(int x) {
  */
 int rotateLeft(int x, int n) {
   /**
-   * I understand this problem conceptually, but I do not understand how to shift bits from the
-   * left side back to the right. I spent a while on various sites looking for an explanation and
-   * all I could find was the commented out solution which does work, but it's not mine.
+   *
    */
-  // return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
-  return 2;
+  return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
 }
 
 /* 
