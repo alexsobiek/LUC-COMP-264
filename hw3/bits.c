@@ -258,7 +258,12 @@ int sign(int x) {
  */
 int rotateLeft(int x, int n) {
   /**
-   *
+   * (x << n) will shift the entire bit pattern to the left by n bits, padding the right side with n 0's
+   * (x >> (32 + ~n + 1) shifts the bit pattern to the right by 32-n, maintaining the original n bits padded
+   * to the right with 0's
+   * ~(~0 << n) creates n bits of 1's
+   * AND the two bit patterns, the original shifted to the left and the secondary with n bits from the left side will
+   * return a left rotated bit pattern.
    */
   return (x << n) | ((x >> (32 + ~n + 1)) & ~(~0 << n));
 }
