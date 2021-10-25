@@ -7,4 +7,5 @@
 *.bc
 *.s
 
+out/
 .idea/
