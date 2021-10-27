@@ -13,7 +13,7 @@ Professor Greenberg<br>
 `loopvar` is initially set to 1 on line 1 and `accum` is set to 0 on line 2
 ```asm
 movl    $1, %edx   ; line #1    Move $1 into %edx
-xorl    %eax, %eax ; line #2    XOR a register with itself sets the register to 0
+xorl    %eax, %eax ; line #2    XOR same register to set it to 0
 ```
 #### E. What is the test condition for `loopvar`?
 The test condition for `loopvar` is not equal to 0. This can be found on line 8
