@@ -1,5 +1,4 @@
 /*
-            %rdi, %rsi
 long loop(long z, int num) {
     long accum = __________;
     long loopvar;
