@@ -35,4 +35,4 @@
         xorq    %rsi, %rax ; line #7    XOR %rsi, %rax
         testq   %rdx, %rdx ; line #8    Is %rdx equal to 0?
         jne     .L3        ; line #9    Jump if not equal to L3 (loop)
-        ret                ; line #10   If equal, returnr
+        ret                ; line #10   If equal, return
