@@ -1,6 +1,6 @@
 Alex Sobiek<br>
 COMP 264<br>
-Dr. Greenberg<br>
+Professor Greenberg<br>
 
 ## Homework 4
 #### A. Which registers hold program values `z` and `num`?
