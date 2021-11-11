@@ -26,13 +26,15 @@ jmp *.L4(,%rdx,8)       ; Indirect jump to the jump table at L4
     .quad .L9           ; case 5 (ECASE)
     .text
 
+; (%rdi) and (%rsi), or *p1 and *p2 are pointers to longs somewhere else
+
 .L2:                    ; Jump to here if %edx == 4 (why?)
-    movl $2, %eax       ; Store 2 in %eax
+    movl $2, %eax       ; Move 2 into %eax (lower 32 bits of %rax)
     ret
 .L3:                    ; case "ACASE"
     movq (%rdi), %rax   ; Move %rdi (long p1) into %rax
-    subq (%rsi), %rax
-    movq %rax, (%rsi)
+    subq (%rsi), %rax   ; Subtract %rsi (long p2) from %rax (which has %rdi in it)
+    movq %rax, (%rsi)   ; Move %rax into %rsi (long p2)
     ret
 .L5:                    ; case "BCASE"
     movq $31, (%rdi)    ; Move 31 into %rdi (replacing long p1)
@@ -46,7 +48,7 @@ jmp *.L4(,%rdx,8)       ; Indirect jump to the jump table at L4
     ret
 .L7:                    ; case "DCASE"
     movq (%rsi), %rax   ; Move %rsi (long p2) into %rax
-    movq %rax, (%rdi)
+    movq %rax, (%rdi)   ; Move %rax into %rdi
     movl $24, %eax      ; Move 24 into %eax (lower 32 bits of $rax)
     ret
 .L9:                    ; case "ECASE"
