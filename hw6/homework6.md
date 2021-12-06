@@ -4,7 +4,7 @@
 
 ### Homework 6-1
 
-#### A. Diagram how this instruction sequence would be decoded into operations, and show how the data dependencies between them would create a critical path of operations in the style of Figures 5.13 (Figure: opt/dpb-sequential) and 5.14 (Figure: opt/dpb-flow and Figure: opt/dpb-flow-abstract). The one of these that we ultimately want submitted in this homework really is Figure: opt/dpb-flow. (25 points.)
+#### A. Diagram how this instruction sequence would be decoded into operations, and show how the data dependencies between them would create a critical path of operations in the style of Figures 5.13 and 5.14 The one of these that we ultimately want submitted in this homework really is Figure: opt/dpb-flow. (25 points.)
 
 ![](diagram.jpg)
 
@@ -24,7 +24,7 @@ The multiplication operation is fully pipelined, or has an issue time of just 1 
 cycle, we can start a new multiplication operation (or in this case, two because we have two floating-point functional
 units). This means in just 2 CPU cycles, we can complete 4 floating-point multiplication operations inside the loop.
 However, because each iteration also includes an addition operation, and we cannot move to the next iteration without 
-finishing the addition, so we're limited by the latency of addition which is 3. 
+finishing the addition, so we're limited by the latency of addition which is 3.
 
 ### Homework 6-2
 #### Write a version of the inner product procedure described in the previous problem that uses four-way loop unrolling with four parallel accumulators. (15 points.)
@@ -37,17 +37,14 @@ void inner5(vec_ptr u, vec_ptr v, data t *dest) {
     a = get_vec_start(v);
     // initialize 4 sums for parallel operations 
     data_t sum = (data_t) 0, sum1 = sum, sum2 = sum, sum3 = sum;
-    // perform the operations of 4 iterations in 1 iteration
-    for (i = 0; i < length; i+=4){
+    for (i = 0; i < length; i+=4){ // Perform the operations of 4 iterations in 1
         sum += udata[i]*vdata[i];
         sum1 += udata[i+1]*vdata[i+1];
         sum2 += udata[i+2]*vdata[i+2];
         sum3 += udata[i+3]*vdata[i+3];
     }
-    // Finish up any remaining elements
-    for (; i < length; i++) sum += udata[i] * vdata[i]; 
-    // Add all the sums up for the final sum
-    *dest = sum + sum1 + sum2 + sum3;
+    for (; i < length; i++) sum += udata[i] * vdata[i]; // Finish remaining elements
+    *dest = sum + sum1 + sum2 + sum3; // Add up all sums
 }
 ```
 
