@@ -21,6 +21,7 @@ Since it's a 16x16 matrix of a struct that has 4 elements each, the number of wr
 
 #### (b) What is the total number of writes that miss in cache?
 We're accessing the data in a linear manner and since each cache block can hold 8 structs and when we access a new cache block we always miss the first, the number of writes that miss will be 128.
+
 #### (c) What is the miss rate?
 128/1024 = 0.125 or 12.5%
 
