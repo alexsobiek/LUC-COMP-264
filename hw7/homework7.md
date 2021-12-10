@@ -42,7 +42,7 @@ for (j=0; j<16; j++) {
 Since it's the same 16x16 matrix with structs of 4 elements, the number or writes for the entire matrix is `16*16*4 = 1024`
 
 #### (b) What is the total number of writes that miss in cache?
-Because each iteration jumps cache blocks, we will miss each time. By the time we finish the inner loop and return to a cache block that we once accessed before, we can assume that it no longer has the previous values that would have been loaded. Therefore, we will miss 1024 writes.
+Because each outer iteration jumps blocks, the first write of each struct will be a miss. Therefore, we will miss 256 writes.
 
 #### (c) What is the miss rate?
-The miss rate will be 100% 
+The miss rate will be 25% 
