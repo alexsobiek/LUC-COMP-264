@@ -39,12 +39,13 @@ for (j=0; j<16; j++) {
 ```
 
 #### (a) What is the total number of writes?
-
+Since it's the same 16x16 matrix with structs of 4 elements, the number or writes for the entire matrix is `16*16*4 = 1024`
 
 #### (b) What is the total number of writes that miss in cache?
-
+Because each iteration jumps, the first write will always be a miss. Therefore, there will be `1024*0.25 = 256` misses. 
 
 #### (c) What is the miss rate?
+Because each iteration has 4 writes with the first always missing, the miss rate will be 1/4 or 25%. 
 
 https://www.yumpu.com/en/document/read/7055877/cs-4400-computer-systems
 https://www.cs.hmc.edu/~mike/courses/workingcs105/f12/quizzes/Quiz7.ans.pdf
